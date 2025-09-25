@@ -42,9 +42,9 @@ Route::middleware(['auth', IsAdminMiddleware::class])->prefix('admin')->name('ad
     Route::delete('/categories/{id}', [AdminCategoryController::class, 'destroy'])->name('category.destroy'); 
 
 
-
     Route::get('orders', [AdminOrderController::class, 'index'])->name('orders');
     Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('order.show');
+    Route::patch('/orders/{id}/complete', [AdminOrderController::class, 'complete'])->name('order.complete');
 });
 
 

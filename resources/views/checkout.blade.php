@@ -1,5 +1,12 @@
 <x-layout>
     <div class="container mx-auto p-6">
+
+        @if(session()->has('error'))
+            <div class="bg-red-100  border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <h1 class="text-2xl font-bold mb-6">Checkout</h1>
 
         <form method="POST" action="{{ route('checkout.store') }}" class="space-y-4">

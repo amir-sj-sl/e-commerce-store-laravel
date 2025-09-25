@@ -30,9 +30,11 @@ class CartController extends Controller
     {
         $user = Auth::user();
         $product = Product::findOrFail($request->input('product_id'));
+        if ($product->stock < 1) {
+            return redirect()->back()->with('error', 'this Product is out of stock');
+        }
 
         $cart = Cart::firstOrCreate(['user_id' => $user->id]);
-
         $item = $cart->items()->where('product_id', $product->id)->first();
 
         if ($item) {
@@ -67,6 +69,9 @@ class CartController extends Controller
             Abort(403);
         }
 
+        if ($request->input('quantity') > $item->product->id) {
+            return redirect()->back()->with('error', 'this Product is out of stock: ');
+        }
         $item->quantity = $request->input('quantity');
         $item->save();
 

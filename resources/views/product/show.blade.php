@@ -23,14 +23,24 @@
             </a>
 
             {{-- Price --}}
-            <div class="text-xl sm:text-2xl md:text-3xl font-semibold text-green-600 mt-2">
-                ${{ number_format($product->price, 2) }}
+            <div class="text-xl sm:text-2xl md:text-3xl font-semibold  mt-2 {{$product->stock < 1 ? ' text-green-200' : 'text-green-600'}}">
+                <p class="{{$product->stock < 1 ? 'line-through' : ''}}">${{ number_format($product->price, 2) }} </p>
+                @if ($product->stock == 0) 
+                    <p class="text-red-600">Out of Sock</p>
+                @endif
             </div>
+
 
             {{-- Description --}}
             <p class="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mt-2">
                 {{ $product->description }}
             </p>
+
+            @if(session()->has('error'))
+                <div class="bg-red-100  border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                    {{ session('error') }}
+                </div>
+            @endif
 
             {{-- Actions --}}
             <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4">
@@ -38,7 +48,7 @@
                 <form action="{{ route('cart.add') }}" method="POST" class="flex-1">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <button class="w-full bg-black text-white px-4 sm:px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition transform hover:scale-105">
+                    <button  {{$product->stock < 1 ? 'disabled' : ''}} class="w-full bg-black text-white px-4 sm:px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition transform hover:scale-105 disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:hover:scale-100">
                         Add to Cart
                     </button>
                 </form>

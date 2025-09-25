@@ -24,6 +24,7 @@
                             <button type="submit" class="text-blue-600 font-medium hover:text-blue-800 transition">
                                 Update
                             </button>
+                            
                         </form>
 
                         {{-- Subtotal with animation --}}
@@ -39,8 +40,13 @@
                                 Remove
                             </button>
                         </form>
-
+                        
                     </div>
+                    @if(session()->has('error'))
+                        <div class="bg-red-100  border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 @endforeach
             </div>
 

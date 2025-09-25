@@ -15,6 +15,17 @@ class CheckoutController extends Controller
         $user = Auth::user();
         $cart = Cart::with('items.product')->where('user_id', $user->id)->first();
 
+        /* $outOfStock = [];
+        foreach($cart->items as $item) {
+            if ($item->product->stock < $item->quantity) {
+                array_push($outOfStock, $item->product->name);
+            }
+        }
+
+        if (!empty($outOfStock)) {
+            return redirect()->back()->with('error', 'this Products are out of stock: ' . implode(', ', $outOfStock));
+        } */
+
         if (!$cart || $cart->items->isEmpty()) {
             return redirect()->route('cart')->with('error', 'Your cart is empty.');
         }
@@ -40,6 +51,17 @@ class CheckoutController extends Controller
         $totalPrice = $cart->items->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
+
+        $outOfStock = [];
+        foreach($cart->items as $item) {
+            if ($item->product->stock < $item->quantity) {
+                array_push($outOfStock, $item->product->name);
+            }
+        }
+
+        if (!empty($outOfStock)) {
+            return redirect()->back()->with('error', 'this Products are out of stock: ' . implode(', ', $outOfStock));
+        }
 
         $order = Order::create([
             'user_id' => $user->id,
