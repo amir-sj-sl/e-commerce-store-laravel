@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminCategoryController extends Controller
@@ -16,8 +17,9 @@ class AdminCategoryController extends Controller
 
     public static function show ($id) 
     {
-        $category = Category::find($id);
-        return view('admin.categories.show', ['category' => $category]);
+        $productsCount = Product::where('category_id', $id)->count();
+        $category = Category::with('products')->find($id);
+        return view('admin.categories.show', ['category' => $category, 'productsCount' => $productsCount]);
     }
 
     public static function add () 
@@ -64,5 +66,14 @@ class AdminCategoryController extends Controller
     {
         Category::find($id)->delete();
         return redirect()->route('admin.categories')->with('status', 'Category Deleted');
+    }
+
+    public function active ($id)
+    {
+        $category = Category::find($id);
+        $newStatus = $category->status == 'active' ? 'inactive' : 'active';
+        $category->update(['status' => $newStatus]);
+    
+        return redirect()->route('admin.category.show', $category->id)->with('status', 'Category status updated');
     }
 }

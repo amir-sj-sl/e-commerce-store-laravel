@@ -4,16 +4,28 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\IsAdminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+/* Route::get('test', function() {
+    // return new OrderPlaced();
+    Mail::to('amirkhomo@gmail.com')->send(
+        new OrderPlaced
+    );
+
+    return 'done';
+}); */
 
 /* Route::get('/', function () {
     return view('index');
@@ -32,6 +44,7 @@ Route::middleware(['auth', IsAdminMiddleware::class])->prefix('admin')->name('ad
     Route::patch('/products/{id}', [AdminProductController::class, 'update'])->name('product.update'); 
     Route::get('/products/{id}', [AdminProductController::class, 'show'])->name('product.show'); 
     Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('product.destroy'); 
+    Route::patch('/products/{id}/active', [AdminProductController::class, 'active'])->name('product.active'); 
 
     Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories'); 
     Route::get('/categories/add', [AdminCategoryController::class, 'add'])->name('category.add'); 
@@ -40,19 +53,28 @@ Route::middleware(['auth', IsAdminMiddleware::class])->prefix('admin')->name('ad
     Route::patch('/categories/{id}', [AdminCategoryController::class, 'update'])->name('category.update'); 
     Route::get('/categories/{id}', [AdminCategoryController::class, 'show'])->name('category.show'); 
     Route::delete('/categories/{id}', [AdminCategoryController::class, 'destroy'])->name('category.destroy'); 
-
+    Route::patch('/categories/{id}/active', [AdminCategoryController::class, 'active'])->name('category.active'); 
 
     Route::get('orders', [AdminOrderController::class, 'index'])->name('orders');
     Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('order.show');
     Route::patch('/orders/{id}/complete', [AdminOrderController::class, 'complete'])->name('order.complete');
+
+    Route::get('users', [AdminUserController::class, 'index'])->name('users');
+    Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('user.show');
+
 });
 
-
-
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = Auth::user();
+    return view('dashboard', ['user' => $user]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/{id}orders', [OrderController::class, 'show'])->name('profile.orders');
+    //Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    //Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -78,9 +100,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 });
-
-
-
 
 
 require __DIR__.'/auth.php';

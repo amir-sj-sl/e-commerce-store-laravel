@@ -1,17 +1,17 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<x-layout>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-900">Dashboard</h1>
+        <h2 class="text-xl sm:text-2xl font-semibold mb-8 text-gray-900">Welcome User</h2>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+        <a href="{{ route('cart', $user->id) }}">Visit My Cart</a>
+        <a href="{{ route('profile.orders', $user->id) }}">Visit My Orders</a>
+ 
+        <h3>My Profile</h3>
+        <p>Name: {{$user->name}}</p>
+        <p>Email: {{$user->email}}</p>
+        <p>Address: {{$user->address}}</p>
+        <p>Phone Number: {{$user->phone}}</p>
+
+        <a href="{{ route('profile.edit', $user->id) }}">Edit Profile</a>
+    </section>
+</x-layout>

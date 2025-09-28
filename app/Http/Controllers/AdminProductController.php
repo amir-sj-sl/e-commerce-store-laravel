@@ -21,8 +21,13 @@ class AdminProductController extends Controller
         return view('admin.products.show', ['product' => $product]);
     }
 
-    public static function add () 
+    public static function add (/* $request = null */) 
     {
+        /* dd($request->all);
+        if ($category_id != null) {
+            $category = Category::findOrFail($id);
+            return view('admin.products.add', ['category' => $category]);
+        } */
         $categories = Category::all();
         return view('admin.products.add', ['categories' => $categories]);
     }
@@ -75,5 +80,14 @@ class AdminProductController extends Controller
         //$products = Product::all();
         //return redirect()->route('admin.products', ['products' => $products]);
         return redirect()->route('admin.products')->with('status', 'Product Deleted');
+    }
+
+    public function active ($id)
+    {
+        $product = Product::find($id);
+        $newStatus = $product->status == 'active' ? 'inactive' : 'active';
+        $product->update(['status' => $newStatus]);
+    
+        return redirect()->route('admin.product.show', $product->id)->with('status', 'Product status updated');
     }
 }

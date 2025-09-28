@@ -15,7 +15,7 @@
             <div>
                 <label for="address" class="block font-medium">Shipping Address</label>
                 <textarea name="address" id="address" required
-                    class="w-full border border-gray-300 rounded px-4 py-2 mt-1">{{ old('address') }}</textarea>
+                    class="w-full border border-gray-300 rounded px-4 py-2 mt-1">{{ $address }}</textarea>
             </div>
 
             <h2 class="text-xl font-semibold mt-6">Your Items</h2>

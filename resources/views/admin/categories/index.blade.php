@@ -32,7 +32,11 @@
                         <td class="px-4 py-2">
                             <a href="{{ route('admin.category.show', $category->id) }}" class="text-blue-600 hover:underline"> {{ $category->id }} </a>
                         </td>
-                        <td class="px-4 py-2"> {{ $category->name }} </td>
+                        <td class="px-4 py-2">
+                            <a href="{{ route('admin.category.show', $category->id) }}" class="hover:text-blue-600 hover:underline">
+                                {{ $category->name }} 
+                            </a>
+                        </td>
                         <td class="px-4 py-2"> {{ $category->status }} </td>
                         <td class="px-4 py-2"> {{ $category->created_at->format('Y-m-d') }} </td>
                         <td class="px-4 py-2 text-center">

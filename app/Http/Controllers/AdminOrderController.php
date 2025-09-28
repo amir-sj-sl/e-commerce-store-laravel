@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
@@ -16,8 +17,9 @@ class AdminOrderController extends Controller
 
     public static function show ($id) 
     {
+        $orderItemsCount = OrderItem::where('order_id', $id)->count();
         $order = Order::with('orderItems.product')->findOrFail($id);
-        return view('admin.orders.show', compact('order'));
+        return view('admin.orders.show', ['order' => $order , 'orderItemsCount' => $orderItemsCount ]);
     }
 
     public function complete ($id)

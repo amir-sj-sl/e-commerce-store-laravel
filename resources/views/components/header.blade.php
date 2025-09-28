@@ -51,6 +51,19 @@
                         </span>
                     @endif
                 </a>
+
+                @if (Auth::user()->is_admin == 1 )
+                <a href="{{ route('admin.dashboard') }}" class="relative text-gray-700 hover:text-black transition">
+                    <p class="text-gray-700 font-medium hover:text-black transition">
+                        Dashboard
+                    </p>
+                </a> @else 
+                <a href="{{ route('dashboard') }}" class="relative text-gray-700 hover:text-black transition">
+                    <p class="text-gray-700 font-medium hover:text-black transition">
+                        Dashboard
+                    </p>
+                </a>
+                @endif
             @endauth
         </div>
     </div>

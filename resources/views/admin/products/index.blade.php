@@ -21,6 +21,7 @@
                 <tr>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">ID</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Name</th>
+                    <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Category</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Price</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Stock</th>
@@ -37,7 +38,16 @@
                                 {{ $product->id }}
                             </a>
                         </td>
-                        <td class="px-4 py-2">{{ $product->name }}</td>
+                        <td class="px-4 py-2">
+                            <a href="{{ route('admin.product.show', $product->id) }}" class="hover:text-blue-600 hover:underline">
+                                {{ $product->name }}
+                            </a>
+                        </td>
+                        <td class="px-4 py-2">
+                            <a href="{{ route('admin.category.show', $product->category->id) }}" class="hover:text-blue-600 hover:underline">
+                                {{ $product->category->name }}
+                            </a>
+                        </td>
                         <td class="px-4 py-2">{{ $product->status }}</td>
                         <td class="px-4 py-2">${{ number_format($product->price, 2) }}</td>
                         <td class="px-4 py-2">{{ $product->stock }}</td>

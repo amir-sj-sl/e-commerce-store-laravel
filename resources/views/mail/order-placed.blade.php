@@ -1,0 +1,1 @@
+<p>Your Order Placed Successfully! We will send your order ASAP.</p>

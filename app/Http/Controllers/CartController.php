@@ -72,6 +72,7 @@ class CartController extends Controller
         if ($request->input('quantity') > $item->product->id) {
             return redirect()->back()->with('error', 'this Product is out of stock: ');
         }
+
         $item->quantity = $request->input('quantity');
         $item->save();
 

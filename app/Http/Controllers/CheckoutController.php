@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
+
+
 
 class CheckoutController extends Controller
 {
@@ -31,7 +35,8 @@ class CheckoutController extends Controller
         }
 
         return view('checkout', [
-            'cart' => $cart
+            'cart' => $cart,
+            'address' => $user->address
         ]);
     }
 
@@ -78,6 +83,12 @@ class CheckoutController extends Controller
                 'price' => $item->product->price,
             ]);
         }
+
+        // MAIL
+        /* Mail::to($order->user)->send(
+            new OrderPlaced($order)
+        ); */
+
 
         $cart->items()->delete();
 

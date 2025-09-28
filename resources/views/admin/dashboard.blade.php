@@ -8,20 +8,6 @@
 
         {{-- Dashboard Cards --}}
         <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            
-            {{-- Users --}}
-            <article class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
-                <h2 class="text-lg font-semibold text-gray-700">Users</h2>
-                <p class="text-3xl font-bold mt-2">{{ $totalUsers }}</p>
-            </article>
-
-            {{-- Orders --}}
-            <a href="{{ route('admin.orders') }}">
-                <article class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
-                    <h2 class="text-lg font-semibold text-gray-700">Orders</h2>
-                    <p class="text-3xl font-bold mt-2">{{ $totalOrders }}</p>
-                </article>
-            </a>
 
             {{-- Products --}}
             <a href="{{ route('admin.products') }}">
@@ -30,12 +16,28 @@
                     <p class="text-3xl font-bold mt-2">{{ $totalProducts }}</p>
                 </article>
             </a>
-
+            
             {{-- Categories --}}
             <a href="{{ route('admin.categories') }}">
                 <article class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
                     <h2 class="text-lg font-semibold text-gray-700">Categories</h2>
                     <p class="text-3xl font-bold mt-2">{{ $totalCategories }}</p>
+                </article>
+            </a>
+            
+            {{-- Users --}}
+            <a href="{{ route('admin.users') }}">
+                <article class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
+                    <h2 class="text-lg font-semibold text-gray-700">Users</h2>
+                    <p class="text-3xl font-bold mt-2">{{ $totalUsers }}</p>
+                </article>
+            </a>
+
+            {{-- Orders --}}
+            <a href="{{ route('admin.orders') }}">
+                <article class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
+                    <h2 class="text-lg font-semibold text-gray-700">Orders</h2>
+                    <p class="text-3xl font-bold mt-2">{{ $totalOrders }}</p>
                 </article>
             </a>
 

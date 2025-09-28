@@ -50,6 +50,12 @@
                             Delete Product
                         </button>
                     </form>
+
+                    <form action="{{ route('admin.product.active', $product->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{ $product->status == 'active' ? 'Inactivate product' : 'Activate product' }}</button>
+                    </form>
                 </div>
             </div>
         </article>
