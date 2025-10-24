@@ -24,6 +24,8 @@
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Category</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Price</th>
+                    <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Sell Price</th>
+                    <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Featured</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Stock</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Created At</th>
                     <th scope="col" class="px-4 py-2 text-center text-sm font-semibold text-gray-700">Edit</th>
@@ -50,6 +52,8 @@
                         </td>
                         <td class="px-4 py-2">{{ $product->status }}</td>
                         <td class="px-4 py-2">${{ number_format($product->price, 2) }}</td>
+                        <td class="px-4 py-2">{{ $product->sell_price  != null ? '$'.$product->sell_price : ''}}</td>
+                        <td class="px-4 py-2">{{ $product->featured == true ? 'featured' : ''}}</td>
                         <td class="px-4 py-2">{{ $product->stock }}</td>
                         <td class="px-4 py-2">{{ $product->created_at->format('Y-m-d') }}</td>
                         <td class="px-4 py-2 text-center">

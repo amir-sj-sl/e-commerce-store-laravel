@@ -47,6 +47,30 @@
                 @enderror
             </div>
 
+            {{-- Sell Price --}}
+            <div>
+                <label for="sell_price" class="block font-semibold mb-1">Sell Price</label>
+                <input type="number" min="0" step="0.01" name="sell_price" id="sell_price"
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+                @error('sell_price')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Featured --}}
+            <fieldset class="flex gap-6 items-center">
+                <legend class="font-semibold">featured</legend>
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="featured" value=1 required> featured
+                </label>
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="featured" value=0> not featured
+                </label>
+                @error('featured')
+                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </fieldset>
+            
             {{-- Stock --}}
             <div>
                 <label for="stock" class="block font-semibold mb-1">Stock</label>
@@ -83,14 +107,22 @@
 
             {{-- Category Dropdown --}}
             <div>
-                <label for="category_id" class="block font-semibold mb-1">Category</label>
-                <select name="category_id" id="category_id" required
-                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black">
-                    <option value="">-- Select Category --</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
+                @if(isset($category))
+                    <label for="category_id" class="block font-semibold mb-1">Category</label>
+                    <select name="category_id" id="category_id" required
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+                        <option value={{$category->id}}>{{$category->name}}</option>
+                    </select>
+                @else
+                    <label for="category_id" class="block font-semibold mb-1">Category</label>
+                    <select name="category_id" id="category_id" required
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+                        <option value="">-- Select Category --</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                @endif
                 @error('category_id')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror

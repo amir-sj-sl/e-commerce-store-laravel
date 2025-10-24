@@ -15,22 +15,15 @@ class OrderItemSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::all();
+        $orders = Order::all();
         $products = Product::all();
 
-        foreach ($users as $user) {
-            $orders = Order::factory(rand(1, 3))->create([
-                'user_id' => $user->id,
+        foreach ($orders as $order) {
+            OrderItem::factory(rand(1, 5))->create([
+                'order_id' => $order->id,
+                'product_id' => $products->random()->id,
+                'price' => $products->random()->price,
             ]);
-
-            foreach ($orders as $order) {
-                OrderItem::factory(rand(1, 5))->make()->each(function ($orderItem) use ($order, $products) {
-                $orderItem->order_id = $order->id;
-                $orderItem->product_id = $products->random()->id; 
-                $orderItem->price = $item->product->price ?? 100; 
-                $orderItem->save();
-                });
-            }
         }
     }
 }

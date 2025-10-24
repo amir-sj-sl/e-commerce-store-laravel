@@ -15,11 +15,22 @@
                             <div class="p-4 space-y-2">
                                 <h3 class="font-semibold text-lg text-gray-800 group-hover:text-black">{{ $product->name }}</h3>
                                 <p class="text-sm text-gray-500 truncate">{{ $product->description }}</p>
-                                <p class="text-indigo-600 font-bold">${{ number_format($product->price, 2) }}</p>
+                                @if ($product->sell_price != null)
+                                    <div class="flex text-center">
+                                        <p class="text-indigo-400 line-through">${{ $product->price }}</p>
+                                        <p class="text-lg text-green-600 group-hover:text-green-700">${{ $product->sell_price }}</p>
+                                    </div>
+                                @else 
+                                    <p class="text-indigo-600 font-bold">${{ number_format($product->price, 2) }}</p>
+                                @endif
                             </div>
                         </div>
                     </a>
                 @endforeach
+            </div>
+
+            <div>
+                {{$products->links()}}
             </div>
         @endif
     </section>

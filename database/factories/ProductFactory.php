@@ -17,12 +17,13 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $seed = rand(110, 190);
         return [
             'name' => fake()->words(3, true),
             'description' => fake()->realText(500),
             'price' => fake()->randomFloat(2, 10, 1000),
             'stock' => fake()->numberBetween(1, 100),
-            'image' => fake()->imageUrl(640, 480, 'products'),
+            'image' => 'https://picsum.photos/id/'.$seed.'/600/300',
             'status' => fake()->randomElement(['active', 'inactive']),
             'category_id' => Category::inRandomOrder()->first()->id,
         ];

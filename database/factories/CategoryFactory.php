@@ -17,9 +17,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {   
+        $seed = rand(110, 190);
         $name = fake()->words(2, true);
         return [
             'name' => $name,
+            'image' => 'https://picsum.photos/id/'.$seed.'/600/300',
             'slug' => Str::slug($name . '-' . fake()->unique()->word),
             'description' => fake()->realText(500),
             'status' => fake()->randomElement(['active', 'inactive']),

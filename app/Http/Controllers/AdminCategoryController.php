@@ -32,6 +32,7 @@ class AdminCategoryController extends Controller
         $valiated = $request->validate([
             'name' => 'required|min:3|max:255',
             'slug' => 'nullable',
+            'image' => 'reqired',
             'description' => 'required',
             'status' => 'required',
         ]);
@@ -52,6 +53,7 @@ class AdminCategoryController extends Controller
         $valiated = $request->validate([
             'name' => 'required|min:3|max:255',
             'slug' => 'nullable',
+            'image' => 'reqired',
             'description' => 'required',
             'status' => 'required',
         ]);

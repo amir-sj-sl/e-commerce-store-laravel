@@ -23,12 +23,22 @@
             </a>
 
             {{-- Price --}}
+            @if ($product->sell_price != null)
+                <div class="text-xl sm:text-2xl md:text-3xl font-semibold  mt-2 {{$product->stock < 1 ? ' text-green-200' : 'text-green-600'}}">
+                    <p class="line-through text-green-200">${{ number_format($product->price, 2) }} </p>
+                    <p class="{{$product->stock < 1 ? 'line-through text-green-200' : 'text-green-600'}}">${{ number_format($product->sell_price, 2) }} </p>
+                    @if ($product->stock == 0) 
+                        <p class="text-red-600">Out of Sock</p>
+                    @endif
+                </div>
+            @else
             <div class="text-xl sm:text-2xl md:text-3xl font-semibold  mt-2 {{$product->stock < 1 ? ' text-green-200' : 'text-green-600'}}">
                 <p class="{{$product->stock < 1 ? 'line-through' : ''}}">${{ number_format($product->price, 2) }} </p>
                 @if ($product->stock == 0) 
                     <p class="text-red-600">Out of Sock</p>
                 @endif
             </div>
+            @endif
 
 
             {{-- Description --}}

@@ -32,12 +32,28 @@ class AdminProductController extends Controller
         return view('admin.products.add', ['categories' => $categories]);
     }
 
+    public static function addToCategory ($id) 
+    {
+
+        // dd($id);
+        /* dd($request->all);
+        if ($category_id != null) {
+            $category = Category::findOrFail($id);
+            return view('admin.products.add', ['category' => $category]);
+        } */
+        $categories = Category::all();
+        $category = Category::find($id);
+        return view('admin.products.add', ['categories' => $categories, 'category' => $category]);
+    }
+
     public static function store (Request $request) 
     {
         $valiated = $request->validate([
             'name' => 'required|min:3|max:255',
             'description' => 'required',
             'price' => 'required',
+            'sell_price' => 'nullable',
+            'featured' => 'required|boolean',
             'stock' => 'required',
             'image' => 'required',
             'status' => 'required',
@@ -62,6 +78,8 @@ class AdminProductController extends Controller
             'name' => 'required|min:3|max:255',
             'description' => 'required',
             'price' => 'required',
+            'sell_price' => 'nullable',
+            'featured' => 'required|boolean',
             'stock' => 'required',
             'image' => 'required',
             'status' => 'required',

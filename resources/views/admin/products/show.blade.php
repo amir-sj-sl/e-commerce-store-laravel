@@ -27,7 +27,9 @@
                         {{ ucfirst($product->status) }}
                     </span>
                 </p>
+                <p class="text-gray-600"><strong>Featured:</strong> {{ $product->featured ? 'Yes' : 'No' }}</p>
                 <p class="text-gray-600"><strong>Price:</strong> ${{ number_format($product->price, 2) }}</p>
+                <p class="text-gray-600"><strong>Sell Price:</strong> {{ $product->sell_price != null ? '$'.number_format($product->sell_price, 2) : 'Not on Sell' }}</p>
                 <p class="text-gray-600"><strong>Stock:</strong> 
                     <span class="{{ $product->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
                         {{ $product->stock }}

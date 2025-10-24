@@ -39,6 +39,7 @@ Route::middleware(['auth', IsAdminMiddleware::class])->prefix('admin')->name('ad
 
     Route::get('/products', [AdminProductController::class, 'index'])->name('products'); 
     Route::get('/products/add', [AdminProductController::class, 'add'])->name('product.add'); 
+    Route::get('/products/add/{id}', [AdminProductController::class, 'addToCategory'])->name('product.addToCategory');   /*  */
     Route::post('/products', [AdminProductController::class, 'store'])->name('product.store'); 
     Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('product.edit'); 
     Route::patch('/products/{id}', [AdminProductController::class, 'update'])->name('product.update'); 

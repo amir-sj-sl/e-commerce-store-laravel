@@ -19,7 +19,7 @@
             <a href="{{ route('product.index') }}" class="hover:text-black transition">Shop</a>
             <a href="/" class="hover:text-black transition">On Sales</a>
             <a href="/" class="hover:text-black transition">New Arrivals</a>
-            <a href="{{ route('category.index') }}" class="hover:text-black transition">Brands</a>
+            <a href="{{ route('category.index') }}" class="hover:text-black transition">Categories</a>
         </nav>
 
         {{-- Search Bar --}}

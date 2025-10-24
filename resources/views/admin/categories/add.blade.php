@@ -51,14 +51,14 @@
 
             
             {{-- Image --}}
-            {{-- <div>
+            <div>
                 <label for="image" class="block font-semibold mb-1">Image URL</label>
-                <input type="text" name="image" id="image"
+                <input type="url" name="image" id="image" required
                     class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black">
                 @error('image')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror
-            </div> --}}
+            </div>
 
             {{-- Status --}}
             <fieldset class="flex gap-6 items-center">

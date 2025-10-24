@@ -30,12 +30,52 @@
     <section class="py-16 px-10 md:px-20 bg-gray-50">
         <h2 class="text-3xl font-bold mb-8">New Arrivals</h2>
         <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            @foreach ($products as $product)
-                <a href="{{ route('product.show', $product) }}" class="group">
+            @foreach ($newArrivals as $newArrival)
+                <a href="{{ route('product.show', $newArrival) }}" class="group">
                     <div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
-                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg text-gray-800 group-hover:text-black">{{ $product->name }}</h3>
+                        <img src="{{ $newArrival->image }}" alt="{{ $newArrival->name }}" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col">
+                            <h3 class="font-semibold text-lg text-gray-800 group-hover:text-black">{{ $newArrival->name }}</h3>
+                            <p class="text-green-600 group-hover:text-green-700">${{ $newArrival->price }}</p>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </section>
+
+    {{-- Featured --}}
+    <section class="py-16 px-10 md:px-20 bg-gray-50">
+        <h2 class="text-3xl font-bold mb-8">Featured</h2>
+        <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            @foreach ($featureds as $featured)
+                <a href="{{ route('product.show', $featured) }}" class="group">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                        <img src="{{ $featured->image }}" alt="{{ $featured->name }}" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col">
+                            <h3 class="font-semibold text-lg text-gray-800 group-hover:text-black">{{ $featured->name }}</h3>
+                            <p class="text-green-600 group-hover:text-green-700">${{ $featured->price }}</p>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </section>
+
+    {{-- On Sells --}}
+    <section class="py-16 px-10 md:px-20 bg-gray-50">
+        <h2 class="text-3xl font-bold mb-8">On Sell</h2>
+        <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            @foreach ($onSells as $onSell)
+                <a href="{{ route('product.show', $onSell) }}" class="group">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                        <img src="{{ $onSell->image }}" alt="{{ $onSell->name }}" class="w-full h-48 object-cover">
+                        <div class="p-4 flex flex-col">
+                            <h3 class="font-semibold text-lg text-gray-800 group-hover:text-black">{{ $onSell->name }}</h3>
+                            <div class="flex text-center">
+                                <p class="text-green-400 group-hover:text-green-400 line-through">${{ $onSell->price }}</p>
+                                <p class="text-lg text-green-600 group-hover:text-green-700">${{ $onSell->sell_price }}</p>
+                            </div>
                         </div>
                     </div>
                 </a>

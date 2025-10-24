@@ -52,13 +52,13 @@
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">{{ $category->status == 'active' ? 'Inactivate Category' : 'Activate Category' }}</button>
                     </form>
 
-                    {{-- <form action="{{ route('admin.product.add') }}">
+                    <form action="{{ route('admin.product.addToCategory', $category->id) }}">
                         @csrf
                         <input type="number" name="category_id" id="category_id" value="{{$category->id}}" hidden>
                         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
                             Add Product to this Category
                         </button>
-                    </form> --}}
+                    </form>
                 </div>
 
                     
@@ -78,6 +78,8 @@
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Product Name</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Product Stock</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Price</th>
+                    <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Sell Price</th>
+                    <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Featured</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">status</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Created At</th>
                     <th scope="col" class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Updated At</th>
@@ -101,6 +103,8 @@
                         </td>
                         <td class="px-4 py-2">{{$product->stock}}</td>
                         <td class="px-4 py-2">{{$product->price}}</td>
+                        <td class="px-4 py-2">{{$product->sell_price  != null ? '$'.$product->sell_price : ''}}</td>
+                        <td class="px-4 py-2">{{$product->featured == true ? 'featured' : ''}}</td>
                         <td class="px-4 py-2">{{$product->status}}</td>
                         <td class="px-4 py-2">{{$product->created_at}}</td>
                         <td class="px-4 py-2">{{$product->updated_at}}</td>

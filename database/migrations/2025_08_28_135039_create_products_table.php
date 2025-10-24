@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 2);
+            $table->decimal('sell_price', 10, 2)->nullable();
+            $table->boolean('featured')->default(false);
             $table->integer('stock')->default(0);
             $table->string('image')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
